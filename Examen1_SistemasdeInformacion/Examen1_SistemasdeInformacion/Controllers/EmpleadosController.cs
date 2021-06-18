@@ -19,12 +19,34 @@ namespace Examen1_SistemasdeInformacion.Controllers
             this.db = db;
 
         }
-
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index(string search)
         {
-            return View(await db.Empleados.ToListAsync());
+            if (search == null)
+            {
+                return View(await db.Empleados.ToListAsync());
+            }
+
+            return View(await db.Empleados
+                .Where(b => b.EmpleadoNombres.Contains(search))
+                .ToListAsync());
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var e = await db.Empleados.FirstOrDefaultAsync(e => e.EmpleadoId == id);
+
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            return View(e);
+        }
         public IActionResult Create()
         {
             return View();
@@ -42,5 +64,77 @@ namespace Examen1_SistemasdeInformacion.Controllers
             }
             return View(e);
         }
-    }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var e = await db.Empleados.FindAsync(id);
+
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            return View(e);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Empleado e)
+        {
+            if (id != e.EmpleadoId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Update(e);
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(e);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var e = await db.Empleados.FirstOrDefaultAsync(m => m.EmpleadoId == id);
+
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            return View(e);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var e = await db.Empleados.FindAsync(id);
+            db.Empleados.Remove(e);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+    
+}
 }

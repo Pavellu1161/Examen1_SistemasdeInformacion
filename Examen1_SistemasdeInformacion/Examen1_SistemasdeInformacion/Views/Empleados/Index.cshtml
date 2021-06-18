@@ -1,35 +1,52 @@
 ﻿@model IEnumerable<Examen1_SistemasdeInformacion.Models.Empleado>
 
-<h2>Lista de empleados:</h2>
+<div class="contenedorprincipal">
 
-<div class="row searh">
+    <h2 class="text">Lista de empleados:</h2>
 
-    <div>
-        <a asp-action="Create" class="btn btn-success">Añadir</a>
+    <div class="espacio">
+        <div class="col-auto">
+            <input type="text" class="form-control-plaintext" id="txt-search" placeholder="Buscar..." />
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-success" onclick="empleado_search()" id="search-link"><i class="fas fa-search"></i> Buscar</a>
+            <a asp-action="Create" class="btn btn-success">Añadir</a>
+        </div>
     </div>
+    <br />
+    <div class="color">
+        <table class="table table-striped table-hover table-sm table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombres:</th>
+                    <th>Apellidos</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-    <table class="table table-striped table-hover table-sm table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>Codigo</th>
-                <th>Nombres:</th>
-                <th>Apellidos</th>
-            </tr>
-        </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.EmpleadoCodigo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmpleadoNombres)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmpleadoApellidos)</td>
+                        <td>
+                            <a asp-action="Edit" class="btn btn-success" asp-route-id="@item.EmpleadoId">Modificar</a>
+                            <a asp-action="Details" class="btn btn-success" asp-route-id="@item.EmpleadoId">Mostar</a>
+                            <a asp-action="Delete" class="btn btn-success" asp-route-id="@item.EmpleadoId">Eliminar</a>
+                        </td>
+                    </tr>
 
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.EmpleadoCodigo)</td>
-                <td>@Html.DisplayFor(modelItem => item.EmpleadoNombres)</td>
-                <td>@Html.DisplayFor(modelItem => item.EmpleadoApellidos)</td>
-            </tr>
-
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+<script src="~/js/empleados.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/Styles.css" />
+
 
 
 
