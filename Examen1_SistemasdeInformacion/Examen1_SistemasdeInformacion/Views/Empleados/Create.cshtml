@@ -1,0 +1,108 @@
+﻿@model Examen1_SistemasdeInformacion.Models.Empleado
+
+@{
+    ViewData["Title"] = "Identificación";
+}
+
+<div class="contenedorprincipal">
+
+    <h2 class="text">Identificación</h2>
+    <hr />
+
+    <div>
+        <form asp-action="Create">
+
+           
+
+            <div class="color">
+                <div class="contenedorizquierdo">
+
+                    <div>
+                        <label asp-for="EmpleadoCodigo"></label>
+                        <input class="input1" asp-for="EmpleadoCodigo">
+                        <span asp-validation-for="EmpleadoCodigo"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoApellidos"></label>
+                        <input class="input" asp-for="EmpleadoApellidos">
+                        <span asp-validation-for="EmpleadoApellidos"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoNombres"></label>
+                        <input class="input" asp-for="EmpleadoNombres">
+                        <span asp-validation-for="EmpleadoNombres"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoApodo"></label>
+                        <input class="input" asp-for="EmpleadoApodo">
+                        <span asp-validation-for="EmpleadoApodo"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoDireccion"></label>
+                        <input class="input" asp-for="EmpleadoDireccion">
+                        <span asp-validation-for="EmpleadoDireccion"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoCodigoPostal"></label>
+                        <input class="input1" asp-for="EmpleadoCodigoPostal">
+                        <span asp-validation-for="EmpleadoCodigoPostal"></span>
+                    </div>
+                </div>
+
+                <div class="contenedorderecho">
+                    <div>
+                        <label asp-for="EmpleadoTelefono"></label>
+                        <input class="input" asp-for="EmpleadoTelefono">
+                        <span asp-validation-for="EmpleadoTelefono"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoCelular"></label>
+                        <input class="input" asp-for="EmpleadoCelular">
+                        <span asp-validation-for="EmpleadoCelular"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoFax"></label>
+                        <input class="input" asp-for="EmpleadoFax">
+                        <span asp-validation-for="EmpleadoFax"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="EmpleadoEmail"></label>
+                        <input class="input" asp-for="EmpleadoEmail">
+                        <span asp-validation-for="EmpleadoEmail"></span>
+                    </div>
+                </div>
+
+                <div class="abajo">
+                    <div>
+                        <label asp-for="EmpleadoObservaciones"></label>
+                        <input class="input2" asp-for="EmpleadoObservaciones">
+                        <span asp-validation-for="EmpleadoObservaciones"></span>
+                    </div>
+                </div>
+
+                <div class="boton">
+                    <input type="submit" value="Registrar" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-success">Volver</a>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<link rel="stylesheet" href="~/css/Styles.css" />
