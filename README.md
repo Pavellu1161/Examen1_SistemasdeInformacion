@@ -1,1 +1,2 @@
-# Examen1_SistemasdeInformacion
+# Examen #1 Sistemas de Indormación
+Kensy Pavelly Gavarrete
